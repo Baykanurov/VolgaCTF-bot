@@ -1,0 +1,23 @@
+services:
+  bot:
+    image: volgactf-bot
+    build:
+      context: ..
+      dockerfile: ./.docker/Dockerfile
+      target: prod
+    command: ["python", "src/main.py"]
+    restart: unless-stopped
+    env_file:
+      - .env
+
+  mongo:
+    image: mongo:4.4
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGO_DB}
+    volumes:
+      - mongodb:/data/db
+      - mongodb_config:/data/configdb
+
+volumes:
+  mongodb:
+  mongodb_config:

@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "volgactf-bot"
+version = "0.1.0"
+description = ""
+authors = ["Baykanurov <vov_ef@mail.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+aiogram = {version = "^3.0.0rc2", allow-prereleases = true}
+pydantic-settings = "^2.0.3"
+mongoengine = "^0.27.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
