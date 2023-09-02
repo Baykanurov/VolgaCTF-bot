@@ -5,17 +5,58 @@ services:
       context: ..
       dockerfile: ./.docker/Dockerfile
       target: dev
-    command: ["python", "src/main.py"]
+    command: ["python", "src/bot.py"]
     restart: unless-stopped
     env_file:
       - .env
+    environment:
+      TZ: "Europe/Samara"
     volumes:
       - ../src:/app/src
+      - ./config_table.json:/app/config_table.json
+    depends_on:
+      - redis
+      - mongo
+
+  worker:
+    command: [ "celery", "-A", "src.worker", "worker", "-l", "INFO", "-B" ]
+    build:
+      context: ..
+      dockerfile: ./.docker/Dockerfile
+      target: dev
+    image: volgactf-bot-worker-dev
+    env_file:
+      - .env
+    environment:
+      TZ: "Europe/Samara"
+    volumes:
+      - ../src:/app/src
+      - ./config_table.json:/app/config_table.json
+    depends_on:
+      - redis
+      - mongo
 
 
   mongo:
     image: mongo:4.4
+    restart: unless-stopped
     environment:
       MONGO_INITDB_DATABASE: ${MONGO_DB}
     ports:
       - "27017:27017"
+
+  flower:
+    image: mher/flower:latest
+    command: [ "celery", "-b", "redis://redis:6379", "flower" ]
+    restart: unless-stopped
+    ports:
+      - "5555:5555"
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+    ports:
+      - 6379:6379
+

@@ -18,3 +18,5 @@ dev/
 *.log
 celerybeat*
 old/
+.docker/config_table.json
+.docker/.env

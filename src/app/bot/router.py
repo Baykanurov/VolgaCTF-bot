@@ -5,7 +5,7 @@ from aiogram import (
     F
 )
 from aiogram.filters import Command
-from src.mongo import get_user, create_user
+from ..mongo import get_user, create_user
 from .helper import (
     get_photo_token,
     get_start_text,
@@ -15,7 +15,6 @@ from .helper import (
 from .keyboard import (
     contacts_keyboard
 )
-from pprint import pprint
 
 router = Router()
 
@@ -46,6 +45,6 @@ async def contacts(message: types.Message):
     )
 
 
-@router.message()
-async def test(message: types.Message):
-    pprint(message.photo[-1].file_id)
+@router.message(F.photo)
+async def get_id_photo(message: types.Message):
+    await message.answer(message.photo[-1].file_id)
