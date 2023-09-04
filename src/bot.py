@@ -1,7 +1,10 @@
+import logging.config
 from aiogram import Bot, Dispatcher
 from app.config import Config
 from app.bot import router
-from app import configuration
+from app import configuration, logger_conf
+
+logging.config.dictConfig(logger_conf())
 
 
 def run_bot(config: Config):

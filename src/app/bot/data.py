@@ -1,7 +1,9 @@
 def get_photo_token() -> dict:
     return {
         'start': 'AgACAgIAAxkBAAMUZO-bsOsI0_7Dv61bXETQ9SpPpW'
-                 'kAAtvPMRv2WIBLZ8N_7m9fWT4BAAMCAAN4AAMwBA'
+                 'kAAtvPMRv2WIBLZ8N_7m9fWT4BAAMCAAN4AAMwBA',
+        'menu': 'AgACAgIAAxkBAAMUZO-bsOsI0_7Dv61bXETQ9SpPpW'
+                'kAAtvPMRv2WIBLZ8N_7m9fWT4BAAMCAAN4AAMwBA'
     }
 
 
@@ -59,3 +61,43 @@ def get_contacts_text() -> str:
 
 Our contacts!
 """
+
+
+def get_bear_gif_url() -> str:
+    return "http://gifki-gifki.ru/go?http://i.imgur.com/7jws4xS.gif"
+
+
+def get_bear_all_text() -> str:
+    return "Запускаю рассылку медведя..."
+
+
+def get_no_auth_text() -> str:
+    return """
+Ты ещё не познакомился с ботом!
+
+Введи команду /start, чтобы начать знакомство
+    """
+
+
+def get_menu_text() -> str:
+    return """
+🔶 Ты можешь задать вопрос организаторам или спикеру, который ведет лекцию!
+
+🔶 Выбери один из пунктов меню и напиши свой вопрос!
+    """
+
+
+def get_question_org_text() -> str:
+    return """
+Напиши свой вопрос организаторам!
+
+Для выхода введи: Отмена
+        """
+
+
+def get_question_spiker_text() -> str:
+    return """
+Напиши свой вопрос спикеру!
+
+Для выхода введи: Отмена
+        """

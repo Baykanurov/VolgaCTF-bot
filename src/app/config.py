@@ -18,10 +18,15 @@ class Table(BaseModel):
     worksheet: str
 
 
+class Admin(BaseModel):
+    key: str
+
+
 class Config(BaseSettings):
     bot: Bot
     mongo: Mongo
     table: Table
+    admin: Admin
 
     class Config:
         env_nested_delimiter = '_'

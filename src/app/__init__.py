@@ -3,6 +3,7 @@ import mongoengine
 from functools import lru_cache
 from pathlib import Path
 from .config import Config
+from .logger import logger_conf
 
 
 @lru_cache()

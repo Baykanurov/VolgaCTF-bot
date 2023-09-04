@@ -2,6 +2,33 @@ from aiogram.utils.keyboard import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.filters.callback_data import CallbackData
 
 
+class RankCallback(CallbackData, prefix="rank"):
+    data: str
+
+
+rank_keyboard = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [
+            InlineKeyboardButton(
+                text="Участник",
+                callback_data=RankCallback(data="participant").pack()
+            )
+        ],
+        [
+            InlineKeyboardButton(
+                text="Гость",
+                callback_data=RankCallback(data="guest").pack()
+            )
+        ],
+        [
+            InlineKeyboardButton(
+                text="Организатор или Волонтер",
+                callback_data=RankCallback(data="organizer").pack()
+            )
+        ]
+    ]
+)
+
 contacts_keyboard = InlineKeyboardMarkup(
     inline_keyboard=[
         [
@@ -38,3 +65,23 @@ contacts_keyboard = InlineKeyboardMarkup(
 )
 
 
+class MenuCallback(CallbackData, prefix="menu"):
+    data: str
+
+
+menu_keyboard = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [
+            InlineKeyboardButton(
+                text="Задать вопрос организаторам ✉️",
+                callback_data=MenuCallback(data="question_org").pack()
+            )
+        ],
+        [
+            InlineKeyboardButton(
+                text="Задать вопрос спикеру 💬",
+                callback_data=MenuCallback(data="question_spiker").pack()
+            )
+        ]
+    ]
+)
