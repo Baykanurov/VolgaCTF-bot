@@ -2,32 +2,59 @@ from aiogram.utils.keyboard import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.filters.callback_data import CallbackData
 
 
-class RankCallback(CallbackData, prefix="rank"):
+class LanguageCallback(CallbackData, prefix="language"):
     data: str
 
 
-rank_keyboard = InlineKeyboardMarkup(
+language_keyboard = InlineKeyboardMarkup(
     inline_keyboard=[
         [
             InlineKeyboardButton(
-                text="Участник",
-                callback_data=RankCallback(data="participant").pack()
+                text="Русский",
+                callback_data=LanguageCallback(data="russian").pack()
             )
         ],
         [
             InlineKeyboardButton(
-                text="Гость",
-                callback_data=RankCallback(data="guest").pack()
-            )
-        ],
-        [
-            InlineKeyboardButton(
-                text="Организатор или Волонтер",
-                callback_data=RankCallback(data="organizer").pack()
+                text="English",
+                callback_data=LanguageCallback(data="english").pack()
             )
         ]
     ]
 )
+
+
+class RankCallback(CallbackData, prefix="rank"):
+    data: str
+
+
+def get_rank_keyboard(language: str) -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text="Участник 👨‍💻"
+                    if language == "russian" else "Participant 👨‍💻",
+                    callback_data=RankCallback(data="participant").pack()
+                )
+            ],
+            [
+                InlineKeyboardButton(
+                    text="Гость 👀"
+                    if language == "russian" else "Guest 👀",
+                    callback_data=RankCallback(data="guest").pack()
+                )
+            ],
+            [
+                InlineKeyboardButton(
+                    text="Организатор или Волонтер 🦸‍♂️"
+                    if language == "russian" else "Organizer or Volunteer 🦸‍♂️",
+                    callback_data=RankCallback(data="organizer").pack()
+                )
+            ]
+        ]
+    )
+
 
 contacts_keyboard = InlineKeyboardMarkup(
     inline_keyboard=[
@@ -69,19 +96,22 @@ class MenuCallback(CallbackData, prefix="menu"):
     data: str
 
 
-menu_keyboard = InlineKeyboardMarkup(
-    inline_keyboard=[
-        [
-            InlineKeyboardButton(
-                text="Задать вопрос организаторам ✉️",
-                callback_data=MenuCallback(data="question_org").pack()
-            )
-        ],
-        [
-            InlineKeyboardButton(
-                text="Задать вопрос спикеру 💬",
-                callback_data=MenuCallback(data="question_spiker").pack()
-            )
+def get_menu_keyboard(language: str) -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text="Задать вопрос организаторам ✉️"
+                    if language == "russian" else "Ask a question to the organizer ✉️",
+                    callback_data=MenuCallback(data="question_org").pack()
+                )
+            ],
+            [
+                InlineKeyboardButton(
+                    text="Задать вопрос спикеру 💬"
+                    if language == "russian" else "Ask a question to the speaker 💬",
+                    callback_data=MenuCallback(data="question_spiker").pack()
+                )
+            ]
         ]
-    ]
-)
+    )

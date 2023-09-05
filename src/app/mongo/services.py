@@ -7,9 +7,9 @@ def create_user(**data):
     User(**data).save()
 
 
-def get_user(telegram_id: str) -> User | None:
+def get_user(telegram_id: str, **kwargs) -> User | None:
     try:
-        user = User.objects.get(telegram_id=telegram_id)
+        user = User.objects.get(telegram_id=telegram_id, **kwargs)
         return user
     except DoesNotExist:
         return

@@ -8,6 +8,7 @@ from mongoengine import (
 class User(Document):
     telegram_id = StringField(required=True)
     name = StringField()
+    language = StringField()
     rank = StringField()
     team = StringField()
 

@@ -20,3 +20,4 @@ celerybeat*
 old/
 .docker/config_table.json
 .docker/.env
+server/

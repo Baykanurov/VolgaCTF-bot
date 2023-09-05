@@ -22,7 +22,7 @@ services:
     build:
       context: ..
       dockerfile: ./.docker/Dockerfile
-      target: dev
+      target: prod
     image: volgactf-bot-worker
     env_file:
       - .env
@@ -39,6 +39,8 @@ services:
     restart: unless-stopped
     environment:
       MONGO_INITDB_DATABASE: ${MONGO_DB}
+    ports:
+      - "27019:27017"
     volumes:
       - mongodb:/data/db
       - mongodb_config:/data/configdb
@@ -56,7 +58,7 @@ services:
     image: redis:alpine
     restart: unless-stopped
     ports:
-      - 6379:6379
+      - "6379:6379"
 
 volumes:
   mongodb:
