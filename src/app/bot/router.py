@@ -224,10 +224,3 @@ async def my_id(message: types.Message):
 @router.message(F.photo)
 async def get_id_photo(message: types.Message):
     await message.answer(message.photo[-1].file_id)
-
-
-@router.message()
-@check_auth_message
-async def all_text(message: types.Message):
-    user = get_user(telegram_id=str(message.from_user.id))
-    await message.answer(text=get_all_text(user.language))

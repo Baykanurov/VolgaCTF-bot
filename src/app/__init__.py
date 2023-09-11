@@ -4,6 +4,7 @@ from functools import lru_cache
 from pathlib import Path
 from .config import Config
 from .logger import logger_conf
+from .worker import TelegramManager, TelegramResponse
 
 
 @lru_cache()
@@ -21,3 +22,6 @@ mongoengine.connect(
     host=f'mongodb://{configuration.mongo.host}:'
          f'{configuration.mongo.port}/{configuration.mongo.db}'
 )
+
+telegram_manager = TelegramManager(token=configuration.bot.token)
+telegram_response = TelegramResponse(telegram_manager=telegram_manager)

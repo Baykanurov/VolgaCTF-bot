@@ -7,7 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-aiogram = {version = "^3.0.0rc2", allow-prereleases = true}
+aiogram = "^3.0.0"
 pydantic-settings = "^2.0.3"
 mongoengine = "^0.27.0"
 gspread = "^5.10.0"

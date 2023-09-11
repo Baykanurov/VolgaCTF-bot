@@ -1,9 +1,10 @@
+import os
+
+
 def get_photo_token() -> dict:
     return {
-        'start': 'AgACAgIAAxkBAAIsGmT3oDwIR4A8dVtjC0UDWSWLnN'
-                 'OdAAId0jEbXwXAS-HT4Z90ykC2AQADAgADeAADMAQ',
-        'menu': 'AgACAgIAAxkBAAIsGmT3oDwIR4A8dVtjC0UDWSWLnNO'
-                'dAAId0jEbXwXAS-HT4Z90ykC2AQADAgADeAADMAQ'
+        'start': os.environ.get("START_PHOTO_ID"),
+        'menu': os.environ.get("MENU_PHOTO_ID")
     }
 
 
