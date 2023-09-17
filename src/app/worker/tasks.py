@@ -1,5 +1,5 @@
 from ...worker import celery
-from .. import telegram_response, worksheet
+from .. import tasks_process, worksheet
 
 
 @celery.on_after_finalize.connect
@@ -9,5 +9,5 @@ def setup_periodic_tasks(sender, **kwargs):
 
 @celery.task
 def send_tasks(*args, **kwargs):
-    result = telegram_response.send_message(worksheet)
+    result = tasks_process.send_message(worksheet)
     return result

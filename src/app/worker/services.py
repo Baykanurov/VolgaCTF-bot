@@ -1,9 +1,14 @@
 import asyncio
+import logging
 from aiogram import Bot
+from aiogram.exceptions import AiogramError
 from aiogram.client.session.aiohttp import AiohttpSession
 from gspread import Worksheet
 from ..mongo import get_users
 from ..table import Tasks, check_task, update_status
+
+
+logger = logging.getLogger(__name__)
 
 
 class BaseTelegramError(Exception):
@@ -59,24 +64,27 @@ class TelegramManager:
 
     @staticmethod
     async def _send_message(bot: Bot, chat_id: int, text: str, photo: str | None = None):
-        if photo:
-            message = await bot.send_photo(
-                chat_id=chat_id,
-                photo=photo,
-                caption=text
-            )
-        else:
-            message = await bot.send_message(
-                chat_id=chat_id,
-                text=text
-            )
+        try:
+            if photo:
+                message = await bot.send_photo(
+                    chat_id=chat_id,
+                    photo=photo,
+                    caption=text
+                )
+            else:
+                message = await bot.send_message(
+                    chat_id=chat_id,
+                    text=text
+                )
+            return message.__dict__
+        except AiogramError as error:
+            logger.error(str(error))
+            return
+        finally:
+            await bot.session.close()
 
-        await bot.session.close()
 
-        return message.__dict__
-
-
-class TelegramResponse:
+class TasksProcess:
     def __init__(self, telegram_manager: TelegramManager):
         self.telegram_manager = telegram_manager
 

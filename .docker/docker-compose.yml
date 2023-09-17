@@ -24,6 +24,7 @@ services:
       dockerfile: ./.docker/Dockerfile
       target: prod
     image: volgactf-bot-worker
+    restart: unless-stopped
     env_file:
       - .env
     environment:
